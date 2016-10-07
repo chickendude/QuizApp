@@ -1,5 +1,6 @@
 package ch.ralena.quizapp;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -73,8 +74,10 @@ public class QuizAppActivity extends AppCompatActivity {
 				String msg;
 				if (quiz.checkAnswer((int) v.getTag())) {
 					msg = "That's correct!";
+					MediaPlayer.create(getApplicationContext(), R.raw.right).start();
 				} else {
 					msg = "Sorry, that wasn't correct";
+					MediaPlayer.create(getApplicationContext(), R.raw.wrong).start();
 				}
 				Toast.makeText(QuizAppActivity.this, msg, Toast.LENGTH_SHORT).show();
 				loadNewQuestion();
