@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,12 +15,14 @@ import java.util.List;
 /*
 	Icon courtesy of Android Asset Studio:
 	https://romannurik.github.io/AndroidAssetStudio/
+
+	Sound effects in the Public Domain, taken from:
+	http://www.freesound.org/
 */
 
 public class QuizAppActivity extends AppCompatActivity {
 	private static final String TAG = View.class.getSimpleName();
 	// get textviews/button(s)
-	private RelativeLayout quizLayout;
 	private LinearLayout buttons;
 	private TextView questionTextView;
 	private Button startButton;
@@ -40,7 +41,6 @@ public class QuizAppActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_quiz_app);
 
 		// find our main layout
-		quizLayout = (RelativeLayout) findViewById(R.id.quizLayout);
 		buttons = (LinearLayout) findViewById(R.id.buttons);
 
 		// create our quiz and the answer buttons
