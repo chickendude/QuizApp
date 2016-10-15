@@ -20,13 +20,17 @@ public class Question {
 		// create the mQuestion string
 		mQuestion = int1 + " + " + int2 + " =";
 
+		int min = int1 > int2 ? int1 : int2;
+		if (min > 97)
+			min = 97;
+
 		// fill the mAnswer box with random data
 		for (int i = 0; i < mAnswer.length; i++) {
 			int value;
 			do {
-				value = rand.nextInt(99) + 1;
+				value = rand.nextInt(100-min) + min + 1;
 			} while (Arrays.asList(mAnswer).contains(value));
-			mAnswer[i] = rand.nextInt(99) + 1;
+			mAnswer[i] = value;
 		}
 
 		// make sure the mCorrect mAnswer is actually mCorrect

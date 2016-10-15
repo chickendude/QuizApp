@@ -4,6 +4,7 @@ public class Quiz {
 	private Question mQuestion;
 	private int mTotalTries;
 	private int mCorrectTries;
+	public final static int MAX_TRIES = 20;
 
 	public Quiz() {
 		mQuestion = new Question();
@@ -11,8 +12,13 @@ public class Quiz {
 		mCorrectTries = 0;
 	}
 
-	public void nextQuestion() {
-		mQuestion.changeEquation();
+	public boolean nextQuestion() {
+		if (mTotalTries == MAX_TRIES)
+			return false;
+		else {
+			mQuestion.changeEquation();
+			return true;
+		}
 	}
 
 	public boolean checkAnswer(int answer) {

@@ -8,12 +8,21 @@
 		android:label="@string/app_name"
 		android:supportsRtl="true"
 		android:theme="@style/AppTheme">
-		<activity android:name=".QuizAppActivity">
+		<activity
+			android:name=".QuizAppActivity">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN"/>
 
 				<category android:name="android.intent.category.LAUNCHER"/>
 			</intent-filter>
+		</activity>
+		<activity
+			android:name=".QuizActivity"
+			android:label="Let's test your addition!"
+			android:parentActivityName=".QuizAppActivity">
+			<meta-data
+				android:name="android.support.PARENT_ACTIVITY"
+				android:value="ch.ralena.quizapp.QuizAppActivity"/>
 		</activity>
 	</application>
 
