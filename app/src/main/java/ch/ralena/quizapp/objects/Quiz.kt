@@ -10,8 +10,8 @@ class Quiz {
 		return totalTries < Constants.MAX_TRIES
 	}
 
-	fun checkAnswer(answer: Int): Boolean {
-		val correct = answer == question.correct
+	fun checkAnswer(index: Int): Boolean {
+		val correct = index == question.correctAnswerIndex
 		totalTries++
 		if (correct) correctTries++
 		return correct
