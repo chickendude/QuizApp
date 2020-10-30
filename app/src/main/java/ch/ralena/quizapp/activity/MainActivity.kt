@@ -30,7 +30,7 @@ class MainActivity : BaseActivity(), MainActivityView.Listener {
 		quiz = Quiz()
 
 		// create a random question at the start
-		var question = quiz.question
+		var question = quiz.question.text
 		question += " ...?"
 		viewMvc.loadQuestionText(question)
 	}

@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import ch.ralena.quizapp.objects.Constants;
 import ch.ralena.quizapp.objects.Quiz;
 import ch.ralena.quizapp.R;
 
@@ -72,19 +73,19 @@ public class QuizActivity extends AppCompatActivity {
 		boolean areQuestionsLeft = mQuiz.nextQuestion();
 		if (areQuestionsLeft) {
 			String question;
-			question = mQuiz.getQuestion();
+			question = mQuiz.getQuestion().getText();
 			question += " ...?";
 			// update radio buttons
 			for (int i = 0; i < mAnswersGroup.getChildCount(); i++) {
 				RadioButton button = (RadioButton) mAnswersGroup.getChildAt(i);
-				button.setText("" + mQuiz.getAnswer(i));
+				button.setText("" + mQuiz.getQuestion().getAnswer(i));
 				button.setTag(i);
 			}
 			int total = mQuiz.getTotalTries();
 			int correct = mQuiz.getCorrectTries();
 
 			mEquationTextView.setText(question);
-			mQuestionsLeftTextView.setText(""+(Quiz.MAX_TRIES - total));
+			mQuestionsLeftTextView.setText(""+(Constants.MAX_TRIES - total));
 			mTotalQuestionsTextView.setText(""+total);
 			mCorrectTextView.setText(""+correct);
 		}

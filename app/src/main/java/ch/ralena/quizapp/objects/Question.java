@@ -40,7 +40,7 @@ public class Question {
 
 	// getters
 
-	public String getQuestion() {
+	public String getText() {
 		return mQuestion;
 	}
 
