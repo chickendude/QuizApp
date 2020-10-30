@@ -1,4 +1,4 @@
-package ch.ralena.quizapp;
+package ch.ralena.quizapp.activity;
 
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -11,6 +11,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import ch.ralena.quizapp.objects.Quiz;
+import ch.ralena.quizapp.R;
 
 public class QuizActivity extends AppCompatActivity {
 	private static final String TAG = QuizActivity.class.getSimpleName();

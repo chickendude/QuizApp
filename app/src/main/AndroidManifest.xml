@@ -9,7 +9,7 @@
 		android:supportsRtl="true"
 		android:theme="@style/AppTheme">
 		<activity
-			android:name=".QuizAppActivity">
+			android:name=".activity.QuizAppActivity">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN"/>
 
@@ -17,12 +17,12 @@
 			</intent-filter>
 		</activity>
 		<activity
-			android:name=".QuizActivity"
+			android:name=".activity.QuizActivity"
 			android:label="Let's test your addition!"
-			android:parentActivityName=".QuizAppActivity">
+			android:parentActivityName=".activity.QuizAppActivity">
 			<meta-data
 				android:name="android.support.PARENT_ACTIVITY"
-				android:value="ch.ralena.quizapp.QuizAppActivity"/>
+				android:value="ch.ralena.quizapp.activity.QuizAppActivity"/>
 		</activity>
 	</application>
 

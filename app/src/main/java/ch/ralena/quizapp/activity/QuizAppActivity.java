@@ -1,4 +1,4 @@
-package ch.ralena.quizapp;
+package ch.ralena.quizapp.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +13,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+import ch.ralena.quizapp.objects.Quiz;
+import ch.ralena.quizapp.R;
+
 /*
 	Icon courtesy of Android Asset Studio:
 	https://romannurik.github.io/AndroidAssetStudio/
@@ -21,7 +24,7 @@ import java.util.List;
 	http://www.freesound.org/
 */
 
-public class QuizAppActivity extends AppCompatActivity {
+public class QuizAppActivity extends BaseActivity {
 	private static final String TAG = View.class.getSimpleName();
 	// get textviews/button(s)
 	private TextView mQuestionTextView;
@@ -37,6 +40,7 @@ public class QuizAppActivity extends AppCompatActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		getInjector().inject(this);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_quiz_app);
 
@@ -57,7 +61,7 @@ public class QuizAppActivity extends AppCompatActivity {
 		mStartButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(QuizAppActivity.this,QuizActivity.class);
+				Intent intent = new Intent(QuizAppActivity.this, QuizActivity.class);
 				startActivity(intent);
 			}
 		});

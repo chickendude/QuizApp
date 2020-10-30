@@ -1,4 +1,4 @@
-package ch.ralena.quizapp;
+package ch.ralena.quizapp.objects;
 
 import java.util.Arrays;
 import java.util.Random;

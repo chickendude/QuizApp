@@ -1,4 +1,6 @@
-package ch.ralena.quizapp;
+package ch.ralena.quizapp.objects;
+
+import ch.ralena.quizapp.objects.Question;
 
 public class Quiz {
 	private Question mQuestion;
