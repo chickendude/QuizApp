@@ -3,6 +3,7 @@ package ch.ralena.quizapp.activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import ch.ralena.quizapp.ScreensNavigator
 import ch.ralena.quizapp.objects.Quiz
 import ch.ralena.quizapp.view.ViewMvcFactory
 import javax.inject.Inject
@@ -17,6 +18,7 @@ import javax.inject.Inject
 class MainActivity : BaseActivity(), MainActivityView.Listener {
 
 	@Inject	lateinit var viewMvcFactory: ViewMvcFactory
+	@Inject lateinit var screensNavigator: ScreensNavigator
 	private lateinit var viewMvc: MainActivityView
 	private lateinit var quiz: Quiz
 
@@ -30,9 +32,7 @@ class MainActivity : BaseActivity(), MainActivityView.Listener {
 		quiz = Quiz()
 
 		// create a random question at the start
-		var question = quiz.question.text
-		question += " ...?"
-		viewMvc.loadQuestionText(question)
+		viewMvc.loadQuestionText(quiz.question.text)
 	}
 
 	override fun onStart() {
@@ -46,8 +46,7 @@ class MainActivity : BaseActivity(), MainActivityView.Listener {
 	}
 
 	override fun onStartButtonClicked() {
-		val intent = Intent(this, QuizActivity::class.java)
-		startActivity(intent)
+		screensNavigator.toQuizActivity()
 	}
 
 	companion object {

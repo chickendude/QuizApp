@@ -4,12 +4,14 @@ import android.media.MediaPlayer
 import android.os.Bundle
 import android.widget.*
 import ch.ralena.quizapp.R
+import ch.ralena.quizapp.ScreensNavigator
 import ch.ralena.quizapp.objects.Quiz
 import ch.ralena.quizapp.view.ViewMvcFactory
 import javax.inject.Inject
 
 class QuizActivity : BaseActivity(), QuizActivityView.Listener {
 	@Inject	lateinit var viewMvcFactory: ViewMvcFactory
+	@Inject lateinit var screensNavigator: ScreensNavigator
 	private lateinit var viewMvc: QuizActivityView
 	private lateinit var quiz: Quiz
 
@@ -23,6 +25,7 @@ class QuizActivity : BaseActivity(), QuizActivityView.Listener {
 
 		quiz = Quiz()
 		quiz.nextQuestion()
+		viewMvc.updateQuizQuestions(quiz)
 	}
 
 	companion object {
@@ -44,9 +47,10 @@ class QuizActivity : BaseActivity(), QuizActivityView.Listener {
 				Toast.makeText(this,
 						"You got ${quiz.correctTries} out of ${quiz.totalTries} correct.",
 						Toast.LENGTH_SHORT).show()
-				finish()
+				screensNavigator.navigateBack()
 			} else {
 				Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+				viewMvc.updateQuizQuestions(quiz)
 				viewMvc.clearCheckedButtons()
 			}
 		} else Toast.makeText(this,
