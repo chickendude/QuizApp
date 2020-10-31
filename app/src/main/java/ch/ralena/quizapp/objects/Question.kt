@@ -25,7 +25,7 @@ class Question {
 		val int2 = correctAnswer - int1
 
 		// create the question string
-		text = "$int1 + $int2 ="
+		text = "$int1 + $int2 = ...?"
 		var min = min (int1, int2)
 		if (min > 97) min = 97
 
