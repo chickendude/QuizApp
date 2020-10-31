@@ -2,8 +2,6 @@ package ch.ralena.quizapp.activity
 
 import android.media.MediaPlayer
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import android.widget.*
 import ch.ralena.quizapp.R
 import ch.ralena.quizapp.objects.Quiz
@@ -11,9 +9,9 @@ import ch.ralena.quizapp.view.ViewMvcFactory
 import javax.inject.Inject
 
 class QuizActivity : BaseActivity(), QuizActivityView.Listener {
-	@Inject lateinit var viewMvcFactory : ViewMvcFactory
-	private lateinit var viewMvc : QuizActivityView
-	private lateinit var mQuiz: Quiz
+	@Inject	lateinit var viewMvcFactory: ViewMvcFactory
+	private lateinit var viewMvc: QuizActivityView
+	private lateinit var quiz: Quiz
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		injector.inject(this)
@@ -23,21 +21,8 @@ class QuizActivity : BaseActivity(), QuizActivityView.Listener {
 		viewMvc.registerListener(this)
 		setContentView(viewMvc.rootView)
 
-		mQuiz = Quiz()
-		// set submit button's onclick listener
-		loadNewQuestion()
-	}
-
-	private fun loadNewQuestion(): Boolean {
-		val areQuestionsLeft = mQuiz.nextQuestion()
-		if (areQuestionsLeft) {
-			var question: String
-			question = mQuiz.question.text
-			question += " ...?"
-			// update radio buttons
-			viewMvc.updateQuizQuestions(mQuiz)
-		}
-		return areQuestionsLeft
+		quiz = Quiz()
+		quiz.nextQuestion()
 	}
 
 	companion object {
@@ -47,23 +32,25 @@ class QuizActivity : BaseActivity(), QuizActivityView.Listener {
 	override fun onSubmitButtonClick(checkedRadioButton: RadioButton?) {
 		if (checkedRadioButton != null) {
 			val msg: String
-			if (mQuiz.checkAnswer(checkedRadioButton.tag as Int)) {
+			if (quiz.checkAnswer(checkedRadioButton.tag as Int)) {
 				msg = "That's correct!"
-				MediaPlayer.create(applicationContext, R.raw.right).start()
+				MediaPlayer.create(this, R.raw.right).start()
 			} else {
 				msg = "Sorry, that wasn't correct"
 				MediaPlayer.create(applicationContext, R.raw.wrong).start()
 			}
-			val questionsLeft = loadNewQuestion()
-			if (!questionsLeft) {
-				Toast.makeText(this@QuizActivity, String.format("You got %d out of %d correct.",
-						mQuiz.correctTries,
-						mQuiz.totalTries),
+
+			if (!quiz.nextQuestion()) {
+				Toast.makeText(this,
+						"You got ${quiz.correctTries} out of ${quiz.totalTries} correct.",
 						Toast.LENGTH_SHORT).show()
 				finish()
 			} else {
-				Toast.makeText(this@QuizActivity, msg, Toast.LENGTH_SHORT).show()
+				Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
 				viewMvc.clearCheckedButtons()
 			}
-		} else Toast.makeText(this@QuizActivity, "Please select an answer first!", Toast.LENGTH_SHORT).show()	}
+		} else Toast.makeText(this,
+				"Please select an answer first!",
+				Toast.LENGTH_SHORT).show()
+	}
 }
